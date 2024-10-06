@@ -17,7 +17,7 @@ class CARD_NAMES {
 }
 
 enum CommandAction {
-    MOVE, DRAW_STOCK, UNDO, EXIT, HELP
+    MOVE, DRAW_STOCK, DRAW_STOCK_REVERSE, UNDO, EXIT, HELP
 }
 
 class UITemplateData {

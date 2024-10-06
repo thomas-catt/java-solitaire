@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Game {
     Stack<Card> stock;
     Stack<Card> waste;
+    Stack<Command> history;
     FoundationCards[] foundation;
     ColumnCards[] column;
     boolean isPlaying;
@@ -11,6 +12,7 @@ public class Game {
     Game() {
         stock = new Stack<>();
         waste = new Stack<>();
+        history = new Stack<>();
         isPlaying = true;
 
         foundation = new FoundationCards[4];
@@ -44,7 +46,7 @@ public class Game {
 
     boolean hasGameWon() {
         for (int i = 0; i < 4; i++) {
-            if (foundation.length < 13)
+            if (foundation[i].length() < 13)
                 return false;
         }
 

@@ -38,10 +38,13 @@ public class Main {
     
             try {
                 Command c = new Command(cmdString);
-                c.execute(g);
+                
+                if (c.execute(g))
+                    g.history.push(c);
                 
             } catch (Exception e) {
                 System.out.println("Failed to execute command: " + e.getMessage());
+                e.printStackTrace();
                 System.out.println("See help by using 'help'.");
             }
         }
