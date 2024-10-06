@@ -24,4 +24,32 @@ public class ColumnCards extends Stack<Card> {
 
         return toreturn;
     }
+
+    @Override
+    boolean push(Card value) throws Exception {
+        Card top = top();
+
+        if (top == null) {
+            if (value.face != CardFace.KING)
+                throw new Exception("Column stack can only start with the King card.");
+
+            return super.push(value);
+        }
+        
+        int faceIndex;
+        for (faceIndex = 0; top.face != CardFace.values()[faceIndex]; faceIndex++);
+
+        if (value.face != CardFace.values()[faceIndex - 1])
+            throw new Exception("Card to add must be exactly one rank lower than the current topmost card on the column stack.");
+            
+        if (value.color == top.color)
+            throw new Exception("Card to add must have opposite color to the current topmost card on the column stack.");
+        
+        return super.push(value);
+    }
+
+    @Override
+    boolean pushForce(Card value) throws Exception {
+        return super.push(value);
+    }
 }

@@ -1,59 +1,81 @@
 public class Stack<T> {
-    static final int MAX_SIZE = 256;
-    protected T[] data;
-    private int head = -1;
+    // static final int MAX_SIZE = 256;
+    // protected T[] data;
+    // private int head = -1;
+    protected Node<T> head;
+    private int length;
 
     Stack() {
-        data = (T[]) new Object[MAX_SIZE];
+        // data = (T[]) new Object[MAX_SIZE];
+        this.length = 0;
+        head = null;
     }
 
     boolean isEmpty() {
-        return head == -1;
-    }
-    
-    boolean isFull() {
-        return head == MAX_SIZE;
+        return length == 0;
     }
 
     int length() {
-        return head + 1;
+        return length;
     }
 
-    boolean push(T value) {
-        if (isFull())
+    boolean push(T value) throws Exception {
+        if (value == null)
             return false;
+        
+        Node<T> n = new Node<>(value);
+        if (head != null)
+            n.next = head;
 
-        data[++head] = value;
+        head = n;
+
+        length++;
         return true;
+    }
+    
+    boolean pushForce(T value) throws Exception {
+        return push(value);
     }
 
     T top() {
         if (isEmpty())
             return null;
             
-        return data[head];
+        return head.data;
     }
 
     T pop() {
         if (isEmpty())
             return null;
 
-        T topValue = top();
-        head--;
+        T topValue = head.data;
+        head = head.next;
+            
+        length--;
         return topValue;
     }
 
     void print() {
-        for (int i = 0; i <= head; i++) {
-            System.out.println(data[i]);
+        Node<T> n = head;
+        while (n != null) {
+            System.out.println(n.data);
+            n = n.next;
         }
     }
 
     protected T getIndex(int index) {
-        return (T) data[index];
+        Node<T> n = head;
+        for (int i = 0; i < (length - index - 1); i++)
+            n = n.next;
+
+        return n.data;
     }
 
     protected void setIndex(int index, T value) {
-        data[index] = value;
+        Node<T> n = head;
+        for (int i = 0; i < (length - index - 1); i++)
+            n = n.next;
+
+        n.data = value;
     }
 }

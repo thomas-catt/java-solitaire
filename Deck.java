@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Deck extends Stack<Card> {
-    Deck() {
+    Deck() throws Exception {
         super();
         for (int i = 1; i < CardType.values().length; i++) {
             CardType type = CardType.values()[i];

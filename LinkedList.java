@@ -47,7 +47,7 @@ public class LinkedList<T> {
         }
     }
     
-    void reverse() {
+    void reverse() throws Exception {
         // create new stack and push all elements onto it
         Stack<T> s = new Stack<>();
         Node<T> n = head;

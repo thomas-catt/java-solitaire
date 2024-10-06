@@ -128,11 +128,26 @@ public class Command {
                 for (int i = 0; i < amount; i++)
                     temp.push(source.pop());
 
-                if (source == null || destination == null) 
-                    throw new Exception("Source or destination null");
+                Stack<Card> pushedCards = new Stack<>();
+                try {
+                    while (temp.length() > 0) {
+                        pushedCards.push(temp.pop());
+                        destination.push(pushedCards.top());                
+                    }
                     
-                while (temp.length() > 0)
-                    destination.push(temp.pop());                
+                } catch (Exception e) {
+                    for (int i = 0; i < pushedCards.length() - 1; i++) {
+                        destination.pop();
+                    }
+                    
+                    while (pushedCards.length() > 0)
+                        temp.push(pushedCards.pop());
+
+                    while (temp.length() > 0)
+                        source.pushForce(temp.pop());  
+
+                    throw new Exception("Can't move to this deck: " + e.getMessage());
+                }
 
 
                 

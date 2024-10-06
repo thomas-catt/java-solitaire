@@ -22,13 +22,13 @@ public class Game {
             column[i] = new ColumnCards(i);
     }
 
-    void init() throws java.io.FileNotFoundException {
+    void init() throws Exception {
         Deck gameStack = new Deck();
         gameStack.shuffle();
 
         for (int i = 0; i < 7; i++)
             for (int j = 0; j <= i; j++)
-                column[i].push(gameStack.pop());
+                column[i].pushForce(gameStack.pop());
 
         while (gameStack.length() > 0)
             stock.push(gameStack.pop());
