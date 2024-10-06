@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Command {
     CommandAction action;
     String from;
